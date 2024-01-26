@@ -1,10 +1,14 @@
 const mongoose = require("mongoose");
 
+const environments = require("../utils/environments");
+
+const { MONGO_ATLAS_URI } = environments;
+
 const connectDB = async () => {
   try {
     mongoose.set("strictQuery", false);
 
-    await mongoose.connect(process.env.MONGO_URI, {
+    await mongoose.connect(MONGO_ATLAS_URI, {
       autoIndex: true,
       autoCreate: true,
     });
