@@ -1,3 +1,5 @@
+const passwordHash = require("password-hash");
+
 const User = require("../models/user.model");
 
 const register = async (fullName, email, password, image) => {
@@ -9,17 +11,14 @@ const register = async (fullName, email, password, image) => {
   const existedEmail = await User.findOne({ email });
   if (existedEmail) throw new Error("Email existed");
 
-  // const user = new User({
-  //   email,
-  //   phone,
-  //   password: passwordHash.generate(password),
-  //   role: 'User',
-  //   history: [],
-  // });
+  const user = new User({
+    fullName,
+    email,
+    password: passwordHash.generate(password),
+    image,
+  });
 
-  // await user.save();
-
-  //   return { fullName, email, password, image };
+  await user.save();
 };
 
 module.exports = {

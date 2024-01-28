@@ -25,7 +25,12 @@ const userSchema = new Schema(
     image: {
       type: String,
     },
-    role: { type: String, required: true, enum: Object.values(UserRoles) },
+    role: {
+      type: String,
+      required: true,
+      enum: Object.values(UserRoles),
+      default: UserRoles.User,
+    },
     likedMovies: [
       {
         type: Schema.Types.ObjectId,

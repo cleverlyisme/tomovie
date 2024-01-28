@@ -5,7 +5,7 @@ const authController = require("../controllers/auth.controller");
 
 const authRoute = express.Router();
 
-// authRoute.post("/login", authController.login);
-authRoute.post("/register", authController.register);
+// authRoute.post("/auth/login", authController.login);
+authRoute.post("/auth/register", authController.register);
 
 module.exports = authRoute;
