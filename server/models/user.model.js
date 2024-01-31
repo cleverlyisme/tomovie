@@ -37,6 +37,7 @@ const userSchema = new Schema(
         ref: "Movie",
       },
     ],
+    isActive: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
