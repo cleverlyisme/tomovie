@@ -8,6 +8,7 @@ const environments = {
   MONGO_ATLAS_URI: process.env.MONGO_ATLAS_URI,
   JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
   APP_EMAIL: process.env.APP_EMAIL,
+  APP_EMAIL_EXPIRE: process.env.APP_EMAIL_EXPIRE,
   APP_PASSWORD: process.env.APP_PASSWORD,
 };
 

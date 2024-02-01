@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const { APP_EMAIL_EXPIRE } = require("../utils/environments");
+
 const Schema = mongoose.Schema;
 
 const tokenSchema = new Schema({
@@ -14,7 +16,7 @@ const tokenSchema = new Schema({
   },
   expireTime: {
     type: Number,
-    default: Date.now() + 600,
+    default: Date.now() + Number(APP_EMAIL_EXPIRE),
   },
 });
 
