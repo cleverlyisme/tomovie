@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 
 const { connectDB } = require("./configs/db");
 const { errorHandler } = require("./middlewares/error.middleware");
-const routes = require("./routes/auth.route");
+const routes = require("./routes/index");
 const environments = require("./utils/environments");
 
 const { PORT } = environments;
@@ -15,6 +15,7 @@ connectDB();
 
 const app = express();
 
+app.use(express.static("public"));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

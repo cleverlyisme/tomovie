@@ -21,7 +21,7 @@ const login = async (email, password) => {
 
   return {
     token: jsonwebtoken.sign({ _id, role }, JWT_SECRET_KEY, {
-      expiresIn: "2d",
+      expiresIn: "7d",
     }),
     user: { _id },
   };
@@ -37,7 +37,8 @@ const register = async (fullName, email, password, image) => {
     throw new Error("Password must be at least 6 characters");
 
   const existedUser = await User.findOne({ email });
-  if (existedUser && existedUser?.isActive) throw new Error("Email existed");
+  if (existedUser && existedUser?.isActive)
+    throw new Error("Email already existed");
 
   const user =
     existedUser ||

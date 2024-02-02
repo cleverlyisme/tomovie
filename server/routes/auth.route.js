@@ -4,8 +4,8 @@ const authController = require("../controllers/auth.controller");
 
 const authRoute = express.Router();
 
-authRoute.post("/auth/login", authController.login);
-authRoute.post("/auth/register", authController.register);
-authRoute.get("/auth/verify-email", authController.verifyEmail);
+authRoute.post("/login", authController.login);
+authRoute.post("/register", authController.register);
+authRoute.get("/verify-email", authController.verifyEmail);
 
 module.exports = authRoute;
