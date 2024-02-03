@@ -15,6 +15,21 @@ const updateProfile = async (req, res) => {
   }
 };
 
+const changePassowrd = async (req, res) => {
+  try {
+    const { userId } = req;
+    const { oldPassowrd, newPassword } = req.body;
+
+    await service.changePassword(oldPassowrd, newPassword, userId);
+
+    res.status(200).send("Change password successfully");
+  } catch (err) {
+    err.message === "User not found"
+      ? res.status(404).send(err.message)
+      : res.status(400).send(err.message);
+  }
+};
+
 const deleteUser = async (req, res) => {
   try {
     const userId = req.params.id;
@@ -29,4 +44,4 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { updateProfile, deleteUser };
+module.exports = { updateProfile, changePassowrd, deleteUser };

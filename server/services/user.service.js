@@ -19,6 +19,27 @@ const updateProfile = async (fullName, image, userId) => {
   };
 };
 
+const changePassowrd = async (oldPassowrd, newPassword, _id) => {
+  const user = await User.findOne({ _id });
+
+  const isPassed = passwordHash.verify(oldPassowrd, user.password);
+  if (!isPassed) throw new Error("Password does not correct");
+
+  if (
+    !newPassword ||
+    !newPassword.trim() ||
+    newPassword.includes("") ||
+    newPassword.length < 6
+  )
+    throw new Error(
+      "Password must be at least 6 characters and not contain space characters"
+    );
+
+  user.password = passwordHash.generate(newPassword);
+
+  await user.save();
+};
+
 const deleteUser = async (_id) => {
   const user = await User.findOne({ _id });
 
@@ -28,4 +49,4 @@ const deleteUser = async (_id) => {
   await user.remove();
 };
 
-module.exports = { updateProfile, deleteUser };
+module.exports = { updateProfile, changePassowrd, deleteUser };

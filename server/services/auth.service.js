@@ -33,8 +33,10 @@ const register = async (fullName, email, password, image) => {
 
   if (!validator.validate(email)) throw new Error("Invalid email address");
 
-  if (password.length < 6)
-    throw new Error("Password must be at least 6 characters");
+  if (password.length < 6 || password.inludes(""))
+    throw new Error(
+      "Password must be at least 6 characters and not contain space characters"
+    );
 
   const existedUser = await User.findOne({ email });
   if (existedUser && existedUser?.isActive)
