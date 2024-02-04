@@ -1,8 +1,58 @@
 const service = require("../services/user.service");
 
+const getLikedMovies = async (req, res) => {
+  try {
+    const { userId } = req;
+
+    const movies = await service.getLikedMovies(userId);
+
+    res.status(200).send({ movies });
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+};
+
+const addLikedMovie = async (req, res) => {
+  try {
+    const { userId } = req;
+    const { movieId } = req.body;
+
+    await service.addLikedMovie(userId, movieId);
+
+    res.status(200).send("Movie added to your favorites");
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+};
+
+const deleteLikedMovie = async (req, res) => {
+  try {
+    const { userId } = req;
+    const { movieId } = req.params.id;
+
+    await service.addLikedMovie(userId, movieId);
+
+    res.status(200).send("Movie has been removed from your favorites");
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+};
+
+const deleteAllLikedMovies = async (req, res) => {
+  try {
+    const { userId } = req;
+
+    await service.deleteAllLikedMovies(userId);
+
+    res.status(200).send("Movies has been removed from your favorites");
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+};
+
 const updateProfile = async (req, res) => {
   try {
-    const userId = req.params.id;
+    const { userId } = req;
     const { fullName, image } = req.body;
 
     const user = await service.updateProfile(fullName, image, userId);
@@ -15,12 +65,12 @@ const updateProfile = async (req, res) => {
   }
 };
 
-const changePassowrd = async (req, res) => {
+const changePassword = async (req, res) => {
   try {
     const { userId } = req;
-    const { oldPassowrd, newPassword } = req.body;
+    const { oldPassword, newPassword } = req.body;
 
-    await service.changePassword(oldPassowrd, newPassword, userId);
+    await service.changePassword(oldPassword, newPassword, userId);
 
     res.status(200).send("Change password successfully");
   } catch (err) {
@@ -30,13 +80,13 @@ const changePassowrd = async (req, res) => {
   }
 };
 
-const deleteUser = async (req, res) => {
+const deleteProfile = async (req, res) => {
   try {
-    const userId = req.params.id;
+    const { userId } = req;
 
-    await service.deleteUser(userId);
+    const user = await service.deleteProfile(userId);
 
-    res.status(200).send("Deleted successfully");
+    res.status(200).send({ user });
   } catch (err) {
     err.message === "User not found"
       ? res.status(404).send(err.message)
@@ -44,4 +94,12 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { updateProfile, changePassowrd, deleteUser };
+module.exports = {
+  getLikedMovies,
+  addLikedMovie,
+  deleteLikedMovie,
+  deleteAllLikedMovies,
+  updateProfile,
+  changePassword,
+  deleteProfile,
+};

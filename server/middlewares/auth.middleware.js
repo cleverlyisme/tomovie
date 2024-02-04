@@ -21,7 +21,9 @@ const auth = (roles) => (req, res, next) => {
 
     next();
   } catch (err) {
-    return res.sendStatus(401);
+    return res
+      .status(401)
+      .send(err.message === "Bad credential" ? err.message : "Unauthorized");
   }
 };
 
