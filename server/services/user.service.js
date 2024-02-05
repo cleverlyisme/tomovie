@@ -10,7 +10,7 @@ const getLikedMovies = async (_id) => {
 };
 
 const addLikedMovie = async (userId, movieId) => {
-  const user = await User.findOne({ _id: userId }).lean();
+  const user = await User.findOne({ _id: userId });
   const movie = await Movie.findOne({ _id: movieId }).lean();
 
   if (!user) throw new Error("User not found");
@@ -20,11 +20,12 @@ const addLikedMovie = async (userId, movieId) => {
     throw new Error("Movie already exists in your favorites");
 
   user.likedMovies.push(movieId.toString());
+
   await user.save();
 };
 
 const deleteLikedMovie = async (userId, movieId) => {
-  const user = await User.findOne({ _id: userId }).lean();
+  const user = await User.findOne({ _id: userId });
   const movie = await Movie.findOne({ _id: movieId }).lean();
 
   if (!user) throw new Error("User not found");
@@ -33,12 +34,14 @@ const deleteLikedMovie = async (userId, movieId) => {
   if (!user.likedMovies.includes(movieId))
     throw new Error("Movie doesn't exist in your favorites");
 
-  user.likedMovies = user.likedMovies.filter((movie) => movie !== movieId);
+  user.likedMovies = user.likedMovies.filter(
+    (movie) => movie.toString() !== movieId
+  );
   await user.save();
 };
 
 const deleteAllLikedMovies = async (userId) => {
-  const user = await User.findOne({ _id: userId }).lean();
+  const user = await User.findOne({ _id: userId });
 
   if (!user) throw new Error("User not found");
 
@@ -47,7 +50,7 @@ const deleteAllLikedMovies = async (userId) => {
 };
 
 const updateProfile = async (fullName, image, userId) => {
-  const user = await User.findOne({ _id: userId }).lean();
+  const user = await User.findOne({ _id: userId });
 
   if (!user) throw new Error("User not found");
   if (fullName && !fullName?.trim())
@@ -66,13 +69,11 @@ const updateProfile = async (fullName, image, userId) => {
 };
 
 const changePassword = async (oldPassword, newPassword, _id) => {
-  const user = await User.findOne({ _id }).lean();
+  const user = await User.findOne({ _id });
   const isPassed = passwordHash.verify(oldPassword, user.password);
   const isDuplicate = passwordHash.verify(newPassword, user.password);
   if (!isPassed) throw new Error("Password does not correct");
   if (isDuplicate) throw new Error("Duplicate old password");
-
-  console.log({ password: passwordHash.generate(newPassword) });
 
   if (
     !newPassword ||
@@ -90,7 +91,7 @@ const changePassword = async (oldPassword, newPassword, _id) => {
 };
 
 const deleteProfile = async (_id) => {
-  const user = await User.findOne({ _id }).lean();
+  const user = await User.findOne({ _id });
 
   if (!user) throw new Error("User not found");
 

@@ -21,7 +21,7 @@ const login = async (email, password) => {
 
   return {
     token: jsonwebtoken.sign({ _id, role }, JWT_SECRET_KEY, {
-      expiresIn: "7d",
+      expiresIn: "30d",
     }),
     user: { _id },
   };

@@ -6,6 +6,7 @@ const adminController = require("../controllers/admin.controller");
 const adminRoute = express.Router();
 
 adminRoute.get("/users", auth(["Admin"]), adminController.getAllUsers);
+adminRoute.post("/movies", auth(["Admin"]), adminController.importMovies);
 adminRoute.delete("/users/:id", auth(["Admin"]), adminController.deleteUser);
 
 module.exports = adminRoute;
