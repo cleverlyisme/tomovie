@@ -61,9 +61,7 @@ const updateProfile = async (req, res) => {
 
     res.status(200).send({ user });
   } catch (err) {
-    err.message === "User not found"
-      ? res.status(404).send(err.message)
-      : res.status(400).send(err.message);
+    res.status(400).send(err.message);
   }
 };
 
@@ -76,9 +74,7 @@ const changePassword = async (req, res) => {
 
     res.status(200).send("Change password successfully");
   } catch (err) {
-    err.message === "User not found"
-      ? res.status(404).send(err.message)
-      : res.status(400).send(err.message);
+    res.status(400).send(err.message);
   }
 };
 
