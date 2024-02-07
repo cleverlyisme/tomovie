@@ -95,7 +95,7 @@ const deleteProfile = async (_id) => {
 
   if (!user) throw new Error("User not found");
 
-  await User.deleteOne({ _id });
+  await user.deleteOne();
 };
 
 module.exports = {
