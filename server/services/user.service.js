@@ -3,6 +3,12 @@ const passwordHash = require("password-hash");
 const User = require("../models/user.model");
 const Movie = require("../models/movie.model");
 
+const getAllUsers = async () => {
+  const users = await User.find({ role: "User" }).lean();
+
+  return users;
+};
+
 const getLikedMovies = async (_id) => {
   const user = await User.findOne({ _id }).lean();
 
@@ -98,7 +104,17 @@ const deleteProfile = async (_id) => {
   await user.deleteOne();
 };
 
+const deleteUser = async (_id) => {
+  const user = await User.findOne({ _id }).lean();
+
+  if (!user) throw new Error("User not found");
+  if (user.role === "Admin") throw new Error("Cannot delete admin user");
+
+  await user.deleteOne();
+};
+
 module.exports = {
+  getAllUsers,
   getLikedMovies,
   addLikedMovie,
   deleteLikedMovie,
@@ -106,4 +122,5 @@ module.exports = {
   updateProfile,
   changePassword,
   deleteProfile,
+  deleteUser,
 };

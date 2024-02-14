@@ -22,4 +22,34 @@ const createCategory = async (req, res) => {
   }
 };
 
-module.exports = { getCategories, createCategory };
+const updateCategory = async (req, res) => {
+  try {
+    const categoryId = req.params.id;
+    const { title } = req.body;
+
+    const category = await service.updateCategory(categoryId, title);
+
+    res.status(200).send({ category });
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+};
+
+const deleteCategory = async (req, res) => {
+  try {
+    const categoryId = req.params.id;
+
+    await service.deleteCategory(categoryId);
+
+    res.status(200).send("Deleted category successfully");
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+};
+
+module.exports = {
+  getCategories,
+  createCategory,
+  updateCategory,
+  deleteCategory,
+};

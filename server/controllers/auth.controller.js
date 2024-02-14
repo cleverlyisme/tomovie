@@ -8,7 +8,7 @@ const login = async (req, res) => {
 
     res.status(200).send({ token, user });
   } catch (err) {
-    res.status(401).send(err.message);
+    res.status(401).json(err.message);
   }
 };
 

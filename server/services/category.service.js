@@ -12,4 +12,29 @@ const createCategory = async (title) => {
   await category.save();
 };
 
-module.exports = { getCategories, createCategory };
+const updateCategory = async (_id, title) => {
+  const category = await Category.findOne({ _id });
+
+  if (!category) throw new Error("Category not found");
+
+  category.title = title || category.title;
+
+  await category.save();
+
+  return category;
+};
+
+const deleteCategory = async (_id) => {
+  const category = await Category.findOne({ _id });
+
+  if (!category) throw new Error("Category not found");
+
+  await category.deleteOne();
+};
+
+module.exports = {
+  getCategories,
+  createCategory,
+  updateCategory,
+  deleteCategory,
+};
