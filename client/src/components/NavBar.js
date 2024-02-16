@@ -19,7 +19,7 @@ const NavBar = () => {
             <img
               src="/logo.png"
               alt="Logo"
-              className="w-full h-12 object-contain"
+              className="w-full h-20 object-contain"
             />
           </Link>
         </div>
