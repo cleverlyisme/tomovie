@@ -34,4 +34,6 @@ const verifyEmail = async (req, res) => {
   }
 };
 
-module.exports = { login, register, verifyEmail };
+const checkAuth = (req, res) => res.sendStatus(200);
+
+module.exports = { login, register, verifyEmail, checkAuth };

@@ -3,38 +3,25 @@ const { initializeApp, cert } = require("firebase-admin/app");
 const dotenv = require("dotenv");
 
 const environments = require("../utils/environments");
-const {
-  FIREBASE_TYPE,
-  FIREBASE_PROJECT_ID,
-  FIREBASE_PRIVATE_KEY_ID,
-  FIREBASE_PRIVATE_KEY,
-  FIREBASE_CLIENT_EMAIL,
-  FIREBASE_CLIENT_ID,
-  FIREBASE_AUTH_URI,
-  FIREBASE_TOKEN_URI,
-  FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
-  FIREBASE_CLIENT_X509_CERT_URL,
-  FIREBASE_UNIVERSE_DOMAIN,
-  FIREBASE_STORAGE_BUCKET,
-} = environments;
 
 dotenv.config();
 
 initializeApp({
   credential: cert({
-    type: FIREBASE_TYPE,
-    project_id: FIREBASE_PROJECT_ID,
-    private_key_id: FIREBASE_PRIVATE_KEY_ID,
-    private_key: FIREBASE_PRIVATE_KEY,
-    client_email: FIREBASE_CLIENT_EMAIL,
-    client_id: FIREBASE_CLIENT_ID,
-    auth_uri: FIREBASE_AUTH_URI,
-    token_uri: FIREBASE_TOKEN_URI,
-    auth_provider_x509_cert_url: FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
-    client_x509_cert_url: FIREBASE_CLIENT_X509_CERT_URL,
-    universe_domain: FIREBASE_UNIVERSE_DOMAIN,
+    type: environments.FIREBASE_TYPE,
+    project_id: environments.FIREBASE_PROJECT_ID,
+    private_key_id: environments.FIREBASE_PRIVATE_KEY_ID,
+    private_key: environments.FIREBASE_PRIVATE_KEY,
+    client_email: environments.FIREBASE_CLIENT_EMAIL,
+    client_id: environments.FIREBASE_CLIENT_ID,
+    auth_uri: environments.FIREBASE_AUTH_URI,
+    token_uri: environments.FIREBASE_TOKEN_URI,
+    auth_provider_x509_cert_url:
+      environments.FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
+    client_x509_cert_url: environments.FIREBASE_CLIENT_X509_CERT_URL,
+    universe_domain: environments.FIREBASE_UNIVERSE_DOMAIN,
   }),
-  storageBucket: FIREBASE_STORAGE_BUCKET,
+  storageBucket: environments.FIREBASE_STORAGE_BUCKET,
 });
 
 const storage = getStorage().bucket();

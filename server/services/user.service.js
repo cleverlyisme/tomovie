@@ -113,6 +113,12 @@ const deleteUser = async (_id) => {
   await user.deleteOne();
 };
 
+const getInfor = async (_id) => {
+  const user = await User.findOne({ _id }).select(["-password", "-__v"]).lean();
+
+  return user;
+};
+
 module.exports = {
   getAllUsers,
   getLikedMovies,
@@ -123,4 +129,5 @@ module.exports = {
   changePassword,
   deleteProfile,
   deleteUser,
+  getInfor,
 };

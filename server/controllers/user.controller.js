@@ -114,6 +114,14 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const getInfor = async (req, res) => {
+  const { userId } = req;
+
+  const user = await service.getInfor(userId);
+
+  res.status(200).send({ user });
+};
+
 module.exports = {
   getAllUsers,
   getLikedMovies,
@@ -124,4 +132,5 @@ module.exports = {
   changePassword,
   deleteProfile,
   deleteUser,
+  getInfor,
 };

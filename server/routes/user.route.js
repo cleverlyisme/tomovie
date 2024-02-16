@@ -6,6 +6,7 @@ const userController = require("../controllers/user.controller");
 const userRoute = express.Router();
 
 userRoute.get("/all", auth(["Admin"]), userController.getAllUsers);
+userRoute.get("/me", auth(), userController.getInfor);
 userRoute.put("/change-password", auth(), userController.changePassword);
 userRoute.get("/favorites", auth(), userController.getLikedMovies);
 userRoute.post("/favorites", auth(), userController.addLikedMovie);
