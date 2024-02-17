@@ -1,5 +1,7 @@
+import SideBar from "./components/SideBar";
+
 const Profile = () => {
-  return <div></div>;
+  return <SideBar>Profile</SideBar>;
 };
 
 export default Profile;

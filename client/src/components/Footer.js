@@ -96,7 +96,11 @@ const Footer = () => {
 
           <div className="pb-3.5 sm:pb-0 col-span-1 md:col-span-2 lg:col-span-3">
             <Link to="/">
-              <img src="/logo.png" alt="Logo" className="h-20 object-contain" />
+              <img
+                src="/assets/images/logo.png"
+                alt="Logo"
+                className="h-20 object-contain"
+              />
             </Link>
             <p className="leading-7 text-sm text-border mt-3">
               <span>

@@ -17,7 +17,7 @@ const NavBar = () => {
         <div className="col-span-1 lg:block hidden">
           <Link to="/">
             <img
-              src="/logo.png"
+              src="/assets/images/logo.png"
               alt="Logo"
               className="w-full h-20 object-contain"
             />

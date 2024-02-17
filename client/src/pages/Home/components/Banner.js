@@ -21,7 +21,7 @@ const Banner = () => {
         {movies.slice(0, 6).map((movie, index) => (
           <SwiperSlide key={index} className="relative rounded overflow-hidden">
             <img
-              src={`/assets/images/movies/${movie.image}`}
+              src={movie.image}
               alt={movie.name}
               className="w-full h-full object-fill"
             />
