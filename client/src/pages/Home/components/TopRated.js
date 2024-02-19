@@ -21,17 +21,21 @@ const TopRated = () => {
     "hover:bg-dry transitions text-sm rounded w-8 h-8 flex-colo bg-subMain text-white";
 
   const breakpoints = {
-    560: {
+    0: {
+      slidesPerView: 1,
+      spaceBetween: 10,
+    },
+    768: {
       slidesPerView: 2,
       spaceBetween: 20,
     },
-    840: {
+    1024: {
       slidesPerView: 3,
       spaceBetween: 30,
     },
     1280: {
       slidesPerView: 4,
-      spaceBetween: 30,
+      spaceBetween: 40,
     },
   };
 
@@ -62,7 +66,7 @@ const TopRated = () => {
                     <FaHeart />
                   </button>
                   <Link
-                    to={`/movies/${movie.id}`}
+                    to={`/movies/${movie._id}`}
                     className="font-semibold text-xl trancuted line-clamp-1"
                   >
                     {movie.name}

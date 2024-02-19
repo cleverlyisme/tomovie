@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { BsCollectionFill } from "react-icons/bs";
 
@@ -8,17 +9,21 @@ import MovieCasts from "./components/MovieCasts";
 import MovieRates from "./components/MovieRates";
 import Titles from "../../components/Titles";
 import Movie from "../../components/Movie";
+import ShareMovieModal from "../../components/Modals/ShareMovieModal";
 
 const MovieDetail = () => {
+  const [openModal, setOpenModal] = useState(false);
+
   const { id } = useParams();
 
-  const movie = movies.find((movie) => movie.id === id);
+  const movie = movies.find((movie) => movie._id === id);
 
   const relatedMovies = movies.filter((m) => m.category === movie.category);
 
   return (
     <Layout>
-      <MovieInfor movie={movie} />
+      <ShareMovieModal open={openModal} setOpen={setOpenModal} movie={movie} />
+      <MovieInfor movie={movie} setOpenModal={setOpenModal} />
       <div className="container mx-auto min-h-screen px-2 my-6">
         <MovieCasts casts={movie?.casts} />
         <MovieRates movie={movie} />

@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
+import AdminRoute from "./AdminRoute";
+
 import Home from "../pages/Home/Home";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import ContactUs from "../pages/ContactUs/ContactUs";
@@ -10,6 +12,8 @@ import Watch from "../pages/Movie/Watch";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import Profile from "../pages/Dashboard/Profile";
+import ChangePassword from "../pages/Dashboard/ChangePassword";
+import FavoritesMovies from "../pages/Dashboard/FavoritesMovies";
 
 const Navigation = () => {
   return (
@@ -23,6 +27,9 @@ const Navigation = () => {
       <Route path="/movies/:id" element={<MovieDetail />} />
       <Route path="/watch/:id" element={<Watch />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/change-password" element={<ChangePassword />} />
+      <Route path="/favorites" element={<FavoritesMovies />} />
+      <Route path="/admin/*" element={<AdminRoute />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

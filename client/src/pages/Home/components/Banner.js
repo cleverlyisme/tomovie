@@ -23,7 +23,7 @@ const Banner = () => {
             <img
               src={movie.image}
               alt={movie.name}
-              className="w-full h-full object-fill"
+              className="w-full h-full object-cover"
             />
             <div className="absolute linear-bg xl:pl-52 sm:pl-32 pl-8 top-0 bottom-0 right-0 left-0 flex flex-col justify-center lg:gap-8 md:gap-5 gap-4">
               <h1 className="xl:text-4xl truncate capitalize font-sans sm:text-2xl text-xl font-bold">
@@ -34,7 +34,7 @@ const Banner = () => {
               </div>
               <div className="flex gap-5 items-center">
                 <Link
-                  to={`/movies/${movie.id}`}
+                  to={`/movies/${movie._id}`}
                   className="bg-subMain hover:text-main transitions text-white px-8 py-3 rounded font-medium sm:text-sm text-xs"
                 >
                   Watch

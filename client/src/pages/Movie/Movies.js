@@ -7,7 +7,7 @@ import Movie from "../../components/Movie";
 import movies from "../../data/movies";
 
 const Movies = () => {
-  const totalPages = 6;
+  const totalPages = 8;
   const [page, setPage] = useState(totalPages);
 
   const handleLoadMore = () => {

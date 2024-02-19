@@ -4,7 +4,7 @@ import { FiLogIn } from "react-icons/fi";
 
 import FlexMovieItems from "../../../components/FlexMovieItems";
 
-const MovieInfor = ({ movie }) => {
+const MovieInfor = ({ movie, setOpenModal }) => {
   return (
     <div className="w-full xl:h-screen relative text-white">
       <img
@@ -39,7 +39,10 @@ const MovieInfor = ({ movie }) => {
               <div className="grid sm:grid-cols-5 grid-cols-3 gap-4 p-6 bg-main border border-gray-800 rounded-lg">
                 {/* Share */}
                 <div className="col-span-1 flex-colo border-r border-border">
-                  <button className="w-10 h-10 flex-colo rounded-lg bg-white bg-opacity-20">
+                  <button
+                    className="w-10 h-10 flex-colo rounded-lg bg-white bg-opacity-20"
+                    onClick={() => setOpenModal(true)}
+                  >
                     <FaShareAlt />
                   </button>
                 </div>
@@ -53,7 +56,7 @@ const MovieInfor = ({ movie }) => {
                 {/* Watch Button */}
                 <div className="sm:col-span-2 col-span-3 flex justify-end font-medium text-sm">
                   <Link
-                    to={`/watch/${movie?.id}`}
+                    to={`/watch/${movie?._id}`}
                     className="bg-dry py-4 hover:bg-subMain transitions border-2 border-subMain rounded-full flex-rows gap-4 w-full sm:py-3"
                   >
                     <FaPlay className="w-3 h-3" /> Watch

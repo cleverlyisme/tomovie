@@ -4,7 +4,9 @@ const User = require("../models/user.model");
 const Movie = require("../models/movie.model");
 
 const getAllUsers = async () => {
-  const users = await User.find({ role: "User" }).lean();
+  const users = await User.find({ role: "User" })
+    .select(["-password", "-__v"])
+    .lean();
 
   return users;
 };

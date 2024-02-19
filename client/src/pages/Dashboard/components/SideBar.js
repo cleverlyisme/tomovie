@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { BsFillGridFill } from "react-icons/bs";
-import { FaHeart, FaListAlt, FaUsers } from "react-icons/fa";
+import { FaHeart, FaUsers } from "react-icons/fa";
 import { RiLockPasswordLine, RiMovie2Fill } from "react-icons/ri";
 import { HiViewGridAdd } from "react-icons/hi";
 import { FiSettings } from "react-icons/fi";
@@ -17,11 +17,6 @@ const SideBar = ({ children }) => {
     {
       name: "Movies",
       path: "/admin/movies",
-      icon: FaListAlt,
-    },
-    {
-      name: "Add Movie",
-      path: "/admin/movies/add",
       icon: RiMovie2Fill,
     },
     {
@@ -69,7 +64,13 @@ const SideBar = ({ children }) => {
               </NavLink>
             ))}
           </div>
-          <div className="col-span-6 rounded-md bg-dry border border-gray-800 p-6">
+          <div
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="10"
+            data-aos-offset="200"
+            className="col-span-6 rounded-md bg-dry border border-gray-800 p-6"
+          >
             {children}
           </div>
         </div>

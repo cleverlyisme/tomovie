@@ -49,7 +49,7 @@ const Footer = () => {
       menus: [
         {
           text: "Dashboard",
-          path: "/dashboard",
+          path: "/admin/dashboard",
         },
         {
           text: "My Favorites",
