@@ -1,23 +1,19 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
-import { doLogin, doLogout } from "../redux/actions/user.action";
-import { checkAuth } from "../services/auth.service";
+import { login, register } from "../services/auth.service";
+import { getInfo } from "../services/user.service";
 
 const useAuth = () => {
+  const [user, setUser] = useState(null);
   const [isInitialized, setIsInitialized] = useState(false);
-  const dispatch = useDispatch();
-
-  const user = useSelector((state) => state.user.account);
 
   const checkAuthentication = async () => {
     try {
-      const res = await checkAuth();
+      const response = await getInfo();
+      const user = response.data.user;
 
-      console.log(res.data);
+      setUser(user);
     } catch (err) {
-      console.log(err.message);
-      dispatch(doLogout());
       localStorage.removeItem("accessToken");
     }
     setIsInitialized(true);
@@ -27,15 +23,23 @@ const useAuth = () => {
     checkAuthentication();
   }, []);
 
-  const login = (data) => {
-    dispatch(doLogin(data));
+  const signIn = async (data) => {
+    const response = await login(data);
+
+    setUser(response.data.user);
+    localStorage.setItem("accessToken", response.data.token);
   };
 
-  const logout = () => {
-    dispatch(doLogout());
+  const signUp = async (data) => {
+    await register(data);
   };
 
-  return { user, login, logout, isInitialized };
+  const signOut = () => {
+    setUser(null);
+    localStorage.removeItem("accessToken");
+  };
+
+  return { user, setUser, signIn, signUp, signOut, isInitialized };
 };
 
 export default useAuth;

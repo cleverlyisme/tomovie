@@ -40,8 +40,6 @@ const deleteLikedMovie = async (req, res) => {
     const { userId } = req;
     const movieId = req.params.id;
 
-    console.log({ movieId });
-
     await service.deleteLikedMovie(userId, movieId);
 
     res.status(200).send("Movie has been removed from your favorites");

@@ -7,10 +7,7 @@ export const loginValidation = yup.object().shape({
     .required("Password is required")
     .min(6, "Password must be at least 6 characters")
     .max(20, "Password must be less than 20 characters")
-    .matches(
-      /(?=.*[0-9])/,
-      "Password must contain only alphanumeric characters"
-    ),
+    .matches(/(?=.*[0-9])/, "Password must contain number"),
 });
 
 export const registerValidation = yup.object().shape({
@@ -20,10 +17,7 @@ export const registerValidation = yup.object().shape({
     .required("Password is required")
     .min(6, "Password must be at least 6 characters")
     .max(20, "Password must be less than 20 characters")
-    .matches(
-      /(?=.*[0-9])/,
-      "Password must contain only alphanumeric characters"
-    ),
+    .matches(/(?=.*[0-9])/, "Password must contain number"),
   fullName: yup
     .string()
     .required("Full name is required")

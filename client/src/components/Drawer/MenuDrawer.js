@@ -7,7 +7,6 @@ import { BiPhoneCall } from "react-icons/bi";
 import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
 
 function MenuDrawer({ drawerOpen, toggleDrawer }) {
-  console.log({ drawerOpen });
   const active = "bg-dry text-subMain";
   const hover = "hover:bg-dry";
   const inActive =

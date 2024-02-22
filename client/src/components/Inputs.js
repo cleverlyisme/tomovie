@@ -36,6 +36,7 @@ export const Input = ({
   placeholder,
   type,
   bg,
+  disabled,
   register,
   name,
   value,
@@ -51,6 +52,7 @@ export const Input = ({
         {...register}
         type={type}
         placeholder={placeholder}
+        disabled={!!disabled}
         className={`w-full text-sm mt-2 p-5 border border-border rounded text-white ${
           bg ? "bg-main" : "bg-dry"
         }`}

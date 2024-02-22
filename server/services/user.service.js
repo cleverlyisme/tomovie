@@ -58,7 +58,10 @@ const deleteAllLikedMovies = async (userId) => {
 };
 
 const updateProfile = async (fullName, image, userId) => {
-  const user = await User.findOne({ _id: userId });
+  const user = await User.findOne({ _id: userId }).select([
+    "-password",
+    "-__v",
+  ]);
 
   if (!user) throw new Error("User not found");
   if (fullName && !fullName?.trim())
@@ -70,10 +73,7 @@ const updateProfile = async (fullName, image, userId) => {
 
   const newUser = await user.save();
 
-  return {
-    fullName: newUser.fullName,
-    image: newUser.image,
-  };
+  return newUser;
 };
 
 const changePassword = async (oldPassword, newPassword, _id) => {
@@ -92,6 +92,10 @@ const changePassword = async (oldPassword, newPassword, _id) => {
     throw new Error(
       "Password must be at least 6 characters and not contain space characters"
     );
+
+  const pattern = /(?=.*[0-9])/;
+  if (!pattern.test(newPassword))
+    throw new Error("Password must contain number");
 
   user.password = passwordHash.generate(newPassword);
 

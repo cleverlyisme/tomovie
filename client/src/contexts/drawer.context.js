@@ -2,7 +2,7 @@ import { createContext, useMemo, useState } from "react";
 
 export const SidebarContext = createContext();
 
-function DrawerContext({ children }) {
+export const DrawerContext = ({ children }) => {
   const [mobileDrawer, setMobileDrawer] = useState(false);
 
   const toggleDrawer = () => setMobileDrawer(!mobileDrawer);
@@ -11,6 +11,4 @@ function DrawerContext({ children }) {
   return (
     <SidebarContext.Provider value={value}>{children}</SidebarContext.Provider>
   );
-}
-
-export default DrawerContext;
+};

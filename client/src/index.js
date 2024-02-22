@@ -13,22 +13,25 @@ import "rc-drawer/assets/index.css";
 
 import "./index.css";
 import App from "./App";
-import DrawerContext from "./contexts/drawer.context";
+import { DrawerContext } from "./contexts/drawer.context";
+import { AppContextProvider } from "./contexts/app.context";
+import ToastContainer from "./components/Notifications/ToastContainer";
 import { store, persistor } from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  <AppContextProvider>
     <DrawerContext>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <BrowserRouter>
+            <ToastContainer />
             <App />
           </BrowserRouter>
         </PersistGate>
       </Provider>
     </DrawerContext>
-  </React.StrictMode>
+  </AppContextProvider>
 );
 
 reportWebVitals();

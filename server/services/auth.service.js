@@ -11,19 +11,19 @@ const { JWT_SECRET_KEY, APP_EMAIL_EXPIRE } = require("../utils/environments");
 
 const login = async (email, password) => {
   const user = await User.findOne({ email }).lean();
-  if (!user) throw new Error("Unauthorized");
-  if (!user.isActive) throw new Error("Please active your account first");
+  if (!user) throw new Error("Invalid email or password");
+  if (!user.isActive) throw new Error("Please verify your account first");
 
   const isPassed = passwordHash.verify(password, user.password);
-  if (!isPassed) throw new Error("Invalid password");
+  if (!isPassed) throw new Error("Invalid email or password");
 
-  const { _id, role } = user;
+  const { _id, fullName, image, role } = user;
 
   return {
     token: jsonwebtoken.sign({ _id, role }, JWT_SECRET_KEY, {
       expiresIn: "30d",
     }),
-    user: { _id },
+    user: { _id, fullName, email, image, role },
   };
 };
 
@@ -38,7 +38,10 @@ const register = async (fullName, email, password, image) => {
       "Password must be at least 6 characters and not contain space characters"
     );
 
-  const existedUser = await User.findOne({ email }).lean();
+  const pattern = /(?=.*[0-9])/;
+  if (!pattern.test(password)) throw new Error("Password must contain number");
+
+  const existedUser = await User.findOne({ email });
   if (existedUser && existedUser?.isActive)
     throw new Error("Email already existed");
 
@@ -48,15 +51,31 @@ const register = async (fullName, email, password, image) => {
       fullName,
       email,
       password: passwordHash.generate(password),
-      image,
+      image: image || "/assets/images/avatar.png",
     });
 
-  !existedUser && (await user.save());
+  const tokenFound = await Token.findOne({
+    userId: user._id,
+  })
+    .sort("-expireTime")
+    .lean();
+
+  if (tokenFound) {
+    const sentTime = Number(tokenFound.expireTime) - 240000;
+    if (Date.now() < sentTime)
+      throw new Error("Please wait 1 minute after every time sent token");
+  }
+
+  if (existedUser) {
+    existedUser.fullName = fullName;
+    existedUser.password = passwordHash.generate(password);
+    await existedUser.save();
+  } else await user.save();
 
   const token = crypto.randomBytes(16).toString("hex");
 
   const verifyToken = new Token({
-    userId: existedUser?._id || user._id,
+    userId: user._id,
     token,
     expireTime: Date.now() + Number(APP_EMAIL_EXPIRE),
   });

@@ -1,7 +1,5 @@
 import api from "./api";
 
-export const login = (data) => api.post("/auth/login", data);
+export const login = async (data) => api.post("/auth/login", data);
 
 export const register = (data) => api.post("/auth/register", data);
-
-export const checkAuth = () => api.get("/auth/check");

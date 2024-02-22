@@ -8,7 +8,7 @@ import Users from "../pages/Dashboard/Admin/Users";
 import NotFound from "../pages/NotFound/NotFound";
 import MovieDetail from "../pages/Dashboard/Admin/MovieDetail";
 
-const ProductRoute = () => {
+const PrivateRoutes = () => {
   return (
     <ScrollOnTop>
       <Routes>
@@ -24,4 +24,4 @@ const ProductRoute = () => {
   );
 };
 
-export default ProductRoute;
+export default PrivateRoutes;

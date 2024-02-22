@@ -3,12 +3,17 @@ import { BsFillGridFill } from "react-icons/bs";
 import { FaHeart, FaUsers } from "react-icons/fa";
 import { RiLockPasswordLine, RiMovie2Fill } from "react-icons/ri";
 import { HiViewGridAdd } from "react-icons/hi";
-import { FiSettings } from "react-icons/fi";
+import { FiLogOut, FiSettings } from "react-icons/fi";
 
+import useAppContext from "../../../hooks/useAppContext";
 import Layout from "../../../components/Layout";
 
 const SideBar = ({ children }) => {
-  const navs = [
+  const {
+    authState: { user, signOut },
+  } = useAppContext();
+
+  const privates = [
     {
       name: "Dashboard",
       path: "/admin/dashboard",
@@ -29,6 +34,9 @@ const SideBar = ({ children }) => {
       path: "/admin/users",
       icon: FaUsers,
     },
+  ];
+
+  const navs = [
     {
       name: "Update Profile",
       path: "/profile",
@@ -46,6 +54,10 @@ const SideBar = ({ children }) => {
     },
   ];
 
+  const logout = () => {
+    signOut();
+  };
+
   const active = "bg-dryGray text-subMain";
   const hover = "hover:text-white hover:bg-main";
   const inActive =
@@ -58,11 +70,20 @@ const SideBar = ({ children }) => {
       <div className="min-h-screen container mx-auto px-2">
         <div className="xl:grid grid-cols-8 gap-10 items-start md:py-12 py-6">
           <div className="col-span-2 sticky bg-dry border border-gray-800 p-6 rounded-md xl:mb-0 mb-5">
+            {user?.role === "Admin" &&
+              privates.map((nav, index) => (
+                <NavLink key={index} to={nav.path} className={Hover}>
+                  <nav.icon /> <p>{nav.name}</p>
+                </NavLink>
+              ))}
             {navs.map((nav, index) => (
               <NavLink key={index} to={nav.path} className={Hover}>
                 <nav.icon /> <p>{nav.name}</p>
               </NavLink>
             ))}
+            <NavLink to="/login" className={Hover} onClick={logout}>
+              <FiLogOut /> <p>Logout</p>
+            </NavLink>
           </div>
           <div
             data-aos="fade-up"

@@ -1,15 +1,21 @@
-import { useDispatch } from "react-redux";
-
-import { setLoading } from "../redux/actions/loading.action";
+import { useState } from "react";
 
 const useLoading = () => {
-  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
-  const setIsLoading = (status) => {
-    dispatch(setLoading(status));
+  return {
+    isLoading,
+    setIsLoading,
+    isCreating,
+    setIsCreating,
+    isUpdating,
+    setIsUpdating,
+    isDeleting,
+    setIsDeleting,
   };
-
-  return { setIsLoading };
 };
 
 export default useLoading;
