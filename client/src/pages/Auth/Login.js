@@ -47,7 +47,7 @@ const Login = () => {
           <img
             src="/assets/images/logo.png"
             alt="logo"
-            className="w-full h-12 object-contain"
+            className="w-full h-20 object-contain"
           />
           <div className="w-full">
             <Input
