@@ -42,7 +42,7 @@ const movies = [
     ],
     reviews: [
       {
-        userName: "Admin zpunet",
+        userName: "Admin ",
         userImage:
           "https://firebasestorage.googleapis.com/v0/b/netflixo-minah.appspot.com/o/3c7ee155-a0ba-4fd0-84e2-7c01ce855d23.jpeg?alt=media",
         rating: 4,
@@ -793,7 +793,7 @@ const movies = [
     ],
     reviews: [
       {
-        userName: "Admin zpunet new",
+        userName: "Admin new",
         userImage:
           "https://firebasestorage.googleapis.com/v0/b/netflixo-minah.appspot.com/o/3c7ee155-a0ba-4fd0-84e2-7c01ce855d23.jpeg?alt=media",
         rating: 5,
@@ -1009,7 +1009,7 @@ const movies = [
     ],
     reviews: [
       {
-        userName: "Zpunet Admin",
+        userName: " Admin",
         userImage:
           "https://firebasestorage.googleapis.com/v0/b/netflixo-minah.appspot.com/o/5b121535-f160-4916-a224-c4ae89cad7fb.png?alt=media",
         rating: 5,
@@ -1020,7 +1020,7 @@ const movies = [
         updatedAt: "2022-11-22T16:03:59.464Z",
       },
       {
-        userName: "Admin zpunet",
+        userName: "Admin ",
         userImage:
           "https://firebasestorage.googleapis.com/v0/b/netflixo-minah.appspot.com/o/3c7ee155-a0ba-4fd0-84e2-7c01ce855d23.jpeg?alt=media",
         rating: 2,
@@ -1189,7 +1189,7 @@ const movies = [
         updatedAt: "2023-02-13T06:48:59.266Z",
       },
       {
-        userName: "Admin zpunet",
+        userName: "Admin ",
         userImage:
           "https://firebasestorage.googleapis.com/v0/b/netflixo-minah.appspot.com/o/3c7ee155-a0ba-4fd0-84e2-7c01ce855d23.jpeg?alt=media",
         rating: 3,
@@ -1283,7 +1283,7 @@ const movies = [
     ],
     reviews: [
       {
-        userName: "Zpunet Admin",
+        userName: " Admin",
         userImage:
           "https://firebasestorage.googleapis.com/v0/b/netflixo-minah.appspot.com/o/5b121535-f160-4916-a224-c4ae89cad7fb.png?alt=media",
         rating: 4,
@@ -1294,7 +1294,7 @@ const movies = [
         updatedAt: "2022-11-22T16:02:52.949Z",
       },
       {
-        userName: "Admin zpunet",
+        userName: "Admin ",
         userImage:
           "https://firebasestorage.googleapis.com/v0/b/netflixo-minah.appspot.com/o/3c7ee155-a0ba-4fd0-84e2-7c01ce855d23.jpeg?alt=media",
         rating: 2,
@@ -1515,7 +1515,7 @@ const movies = [
     ],
     reviews: [
       {
-        userName: "Zpunet Admin",
+        userName: " Admin",
         userImage:
           "https://firebasestorage.googleapis.com/v0/b/netflixo-minah.appspot.com/o/5b121535-f160-4916-a224-c4ae89cad7fb.png?alt=media",
         rating: 0,
@@ -1623,7 +1623,7 @@ const movies = [
     titleImage:
       "https://firebasestorage.googleapis.com/v0/b/netflixo-minah.appspot.com/o/a2b1fd45-1c57-4c94-ada3-f2d85751fba4.jpeg?alt=media",
     image:
-      "https://firebasestorage.googleapis.com/v0/b/netflixo-minah.appspot.com/o/eff7e6f7-111c-40b2-a4ff-746a3687e99b.jpeg?alt=media",
+      "https://firebasestorage.googleapis.com/v0/b/netflixo-minah.appspot.com/o/6a4bbc46-f21f-4023-b06f-92043a09699c.jpg?alt=media",
     category: "Drama",
     language: "Korean",
     year: 2019,
@@ -1677,7 +1677,7 @@ const movies = [
         updatedAt: "2022-11-23T09:11:57.704Z",
       },
       {
-        userName: "Admin zpunet",
+        userName: "Admin ",
         userImage:
           "https://firebasestorage.googleapis.com/v0/b/netflixo-minah.appspot.com/o/3c7ee155-a0ba-4fd0-84e2-7c01ce855d23.jpeg?alt=media",
         rating: 3,

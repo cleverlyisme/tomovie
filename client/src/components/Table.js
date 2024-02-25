@@ -5,7 +5,7 @@ import { FaEdit } from "react-icons/fa";
 const Head = "text-xs text-left text-main font-semibold px-6 py-2 uppercase";
 const Text = "text-sm text-left leading-6 whitespace-nowrap px-5 py-3";
 
-const UsersRows = (item, index) => {
+const UsersRows = (item, index, onDeleteFunction) => {
   return (
     <tr key={index}>
       <td className={`${Text}`}>
@@ -21,7 +21,7 @@ const UsersRows = (item, index) => {
       <td className={`${Text}`}>{item?.fullName}</td>
       <td className={`${Text}`}>{item?.email}</td>
       <td className={`${Text} flex-rows py-5`}>
-        <div className="w-8 h-8 flex-colo border border-border rounded p-2 cursor-pointer">
+        <div className="w-8 h-8 flex-colo border border-border rounded p-2">
           {!!item?.isActive ? (
             <img
               src="/assets/images/check.svg"
@@ -39,7 +39,10 @@ const UsersRows = (item, index) => {
       </td>
       <td className={`${Text}`}>{item?.createdAt}</td>
       <td className={`${Text} flex-rows py-5`}>
-        <button className="bg-subMain text-white rounded flex-colo w-6 h-6">
+        <button
+          className="bg-subMain text-white rounded flex-colo w-6 h-6"
+          onClick={() => onDeleteFunction(item?._id)}
+        >
           <MdDelete />
         </button>
       </td>
@@ -47,7 +50,7 @@ const UsersRows = (item, index) => {
   );
 };
 
-const CategoriesRows = (item, index, onEditFunction) => {
+const CategoriesRows = (item, index, onEditFunction, onDeleteFunction) => {
   return (
     <tr key={index}>
       <td className={`${Text} truncate`}>{item?._id}</td>
@@ -60,7 +63,10 @@ const CategoriesRows = (item, index, onEditFunction) => {
         >
           Edit <FaEdit className="text-green-500" />
         </button>
-        <button className="bg-subMain text-white rounded flex-colo w-6 h-6">
+        <button
+          className="bg-subMain text-white rounded flex-colo w-6 h-6"
+          onClick={() => onDeleteFunction(item?._id)}
+        >
           <MdDelete />
         </button>
       </td>
@@ -68,7 +74,7 @@ const CategoriesRows = (item, index, onEditFunction) => {
   );
 };
 
-const Table = ({ categories, users, onEditFunction }) => {
+const Table = ({ categories, users, onEditFunction, onDeleteFunction }) => {
   return (
     <div className="overflow-x-scroll overflow-hidden relative w-full">
       <table className="w-full table-auto border border-border divide-y divide-border">
@@ -115,9 +121,16 @@ const Table = ({ categories, users, onEditFunction }) => {
         </thead>
         <tbody className="bg-main divide-y divide-gray-800">
           {users
-            ? users.map((user, index) => UsersRows(user, index))
+            ? users.map((user, index) =>
+                UsersRows(user, index, onDeleteFunction)
+              )
             : categories.map((category, index) =>
-                CategoriesRows(category, index, onEditFunction)
+                CategoriesRows(
+                  category,
+                  index,
+                  onEditFunction,
+                  onDeleteFunction
+                )
               )}
         </tbody>
       </table>

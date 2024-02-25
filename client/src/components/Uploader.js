@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import Loader from "./Notifications/Loader";
 import { uploadImage } from "../services/upload.service";
 
-function Uploader({ setImageUrl }) {
+function Uploader({ setImageUrl, video }) {
   const [isLoading, setIsLoading] = useState(false);
 
   // upload file
@@ -49,13 +49,17 @@ function Uploader({ setImageUrl }) {
           <span className="mx-auto flex-colo text-subMain text-3xl">
             <FiUploadCloud />
           </span>
-          <p className="text-sm mt-2">Drag your image here</p>
+          <p className="text-sm mt-2">
+            {video ? "Drag your video file here" : "Drag your image here"}
+          </p>
           <em className="text-xs text-border">
             {isDragActive
               ? "Drop it like it's hot!"
               : isDragReject
               ? "Unsupported file type..."
-              : "only .jpg and .png files will be accepted"}
+              : video
+              ? "Only .mkv and .mp4 files will be accepted"
+              : "Only .jpg and .png files will be accepted"}
           </em>
         </div>
       )}

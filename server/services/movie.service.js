@@ -1,8 +1,10 @@
 const Movie = require("../models/movie.model");
+const Category = require("../models/category.model");
 const User = require("../models/user.model");
 
 const getMovies = async (filters, page = 1, limit) => {
   const movies = await Movie.find(filters)
+    .populate("category")
     .sort({ createdAt: -1 })
     .limit(Number(limit))
     .skip(Number(limit) * (Number(page) - 1))
@@ -24,7 +26,7 @@ const getMovies = async (filters, page = 1, limit) => {
 };
 
 const getMovieById = async (_id) => {
-  const movie = await Movie.findOne({ _id }).lean();
+  const movie = await Movie.findOne({ _id }).populate("category").lean();
 
   if (!movie) throw new Error("Movie not found");
 
@@ -32,13 +34,22 @@ const getMovieById = async (_id) => {
 };
 
 const getTopRatedMovies = async () => {
-  const movies = await Movie.find({}).sort({ rate: -1 }).lean();
+  const movies = await Movie.find({})
+    .populate("category")
+    .sort({ rate: -1 })
+    .lean();
 
   return movies || [];
 };
 
-const getRandomMovies = async () => {
-  const movies = await Movie.aggregate([{ $sample: { size: 8 } }]);
+const getRelatedMovies = async (_id) => {
+  const movie = await Movie.findOne({ _id }).lean();
+
+  if (!movie) throw new Error("Movie not found");
+
+  const movies = await Movie.find({ category: movie.category }).populate(
+    "category"
+  );
 
   return movies || [];
 };
@@ -58,6 +69,10 @@ const createMovie = async ({
   video,
   casts,
 }) => {
+  const categoryExist = await Category.findOne({ _id: category });
+
+  if (!categoryExist) throw new Error("Category not found");
+
   const movie = new Movie({
     userId,
     name,
@@ -95,6 +110,10 @@ const updateMovie = async ({
   const movie = await Movie.findOne({ _id: movieId });
 
   if (!movie) throw new Error("Movie not found");
+
+  const categoryExist = await Category.findOne({ _id: category });
+
+  if (!categoryExist) throw new Error("Category not found");
 
   movie.name = name || movie.name;
   movie.desc = desc || movie.desc;
@@ -147,17 +166,19 @@ const createReview = async (_id, userId, rating, comment) => {
   movie.reviews.push(review);
   movie.numberOfReviews = movie.reviews.length;
   movie.rate =
-    movie.reviews.reduce((acc, item) => item.rating + acc, 0) /
+    movie.reviews.reduce((acc, item) => Number(item.rating) + acc, 0) /
     movie.reviews.length;
 
   await movie.save();
+
+  return movie;
 };
 
 module.exports = {
   getMovies,
   getMovieById,
   getTopRatedMovies,
-  getRandomMovies,
+  getRelatedMovies,
   createMovie,
   updateMovie,
   deleteMovie,

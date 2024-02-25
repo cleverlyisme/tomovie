@@ -10,5 +10,10 @@ adminRoute.post(
   auth(["Admin"]),
   adminController.importMovies
 );
+adminRoute.post(
+  "/categories/import",
+  auth(["Admin"]),
+  adminController.importCategories
+);
 
 module.exports = adminRoute;

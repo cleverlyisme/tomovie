@@ -7,6 +7,7 @@ const categoryRoute = express.Router();
 
 categoryRoute.get("/", categoryController.getCategories);
 categoryRoute.post("/", auth(["Admin"]), categoryController.createCategory);
+categoryRoute.get("/:id", categoryController.getCategoryById);
 categoryRoute.put("/:id", auth(["Admin"]), categoryController.updateCategory);
 categoryRoute.delete(
   "/:id",

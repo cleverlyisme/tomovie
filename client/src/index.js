@@ -16,20 +16,15 @@ import App from "./App";
 import { DrawerContext } from "./contexts/drawer.context";
 import { AppContextProvider } from "./contexts/app.context";
 import ToastContainer from "./components/Notifications/ToastContainer";
-import { store, persistor } from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AppContextProvider>
     <DrawerContext>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <BrowserRouter>
-            <ToastContainer />
-            <App />
-          </BrowserRouter>
-        </PersistGate>
-      </Provider>
+      <BrowserRouter>
+        <ToastContainer />
+        <App />
+      </BrowserRouter>
     </DrawerContext>
   </AppContextProvider>
 );

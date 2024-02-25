@@ -16,15 +16,6 @@ const Rating = ({ value }) => {
           )}
         </span>
       ))}
-      {/* <span>
-      {value >= 1 ? (
-        <FaStar />
-      ) : value >= 0.5 ? (
-        <FaStarHalfAlt />
-      ) : (
-        <FaRegStar />
-      )}
-    </span> */}
     </>
   );
 };

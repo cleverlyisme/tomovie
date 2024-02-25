@@ -14,7 +14,12 @@ const getAllUsers = async () => {
 const getLikedMovies = async (_id) => {
   const user = await User.findOne({ _id }).lean();
 
-  return user?.likedMovies || [];
+  const movies = await Movie.find()
+    .where("_id")
+    .in(user?.likedMovies || [])
+    .exec();
+
+  return movies;
 };
 
 const addLikedMovie = async (userId, movieId) => {
@@ -111,12 +116,16 @@ const deleteProfile = async (_id) => {
 };
 
 const deleteUser = async (_id) => {
-  const user = await User.findOne({ _id }).lean();
+  const user = await User.findOne({ _id });
 
   if (!user) throw new Error("User not found");
   if (user.role === "Admin") throw new Error("Cannot delete admin user");
 
   await user.deleteOne();
+
+  const users = await User.find({}).lean();
+
+  return users;
 };
 
 const getInfor = async (_id) => {

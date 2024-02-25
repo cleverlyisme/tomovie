@@ -10,6 +10,17 @@ const importMovies = async (req, res) => {
   }
 };
 
+const importCategories = async (req, res) => {
+  try {
+    await service.importCategories();
+
+    res.status(200).send("Imported categories successfully");
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+};
+
 module.exports = {
   importMovies,
+  importCategories,
 };

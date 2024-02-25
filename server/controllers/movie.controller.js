@@ -43,9 +43,10 @@ const getTopRatedMovies = async (req, res) => {
   }
 };
 
-const getRandomMovies = async (req, res) => {
+const getRelatedMovies = async (req, res) => {
   try {
-    const movies = await service.getRandomMovies();
+    const movieId = req.params.id;
+    const movies = await service.getRelatedMovies(movieId);
 
     res.status(200).send({ movies });
   } catch (err) {
@@ -157,9 +158,9 @@ const createReview = async (req, res) => {
     const movieId = req.params.id;
     const { rating, comment } = req.body;
 
-    await service.createReview(movieId, userId, rating, comment);
+    const movie = await service.createReview(movieId, userId, rating, comment);
 
-    res.status(200).send("Created review successfully");
+    res.status(200).send({ movie });
   } catch (err) {
     res.status(400).send(err.message);
   }
@@ -169,7 +170,7 @@ module.exports = {
   getMovies,
   getMovieById,
   getTopRatedMovies,
-  getRandomMovies,
+  getRelatedMovies,
   createMovie,
   updateMovie,
   deleteMovie,

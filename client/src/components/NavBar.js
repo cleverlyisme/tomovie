@@ -37,9 +37,11 @@ const NavBar = () => {
   const loadLikedMovies = async () => {
     setIsLoading(true);
     try {
-      const likedMovies = await getLikedMovies();
+      const response = await getLikedMovies();
 
-      setLikedMovies(likedMovies);
+      const data = response.data;
+
+      setLikedMovies(data.movies);
     } catch (err) {
       toast.error(err?.response?.data || err.message);
     }
