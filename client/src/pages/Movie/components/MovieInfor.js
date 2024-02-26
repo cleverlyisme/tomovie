@@ -9,7 +9,7 @@ import useAppContext from "../../../hooks/useAppContext";
 import FlexMovieItems from "../../../components/FlexMovieItems";
 import { DownloadVideo } from "../../../utils/functionalities";
 
-const MovieInfor = ({ movie, setOpenModal }) => {
+const MovieInfor = ({ movieId, movie, setOpenModal }) => {
   const {
     loadingState: { setIsLoading },
   } = useAppContext();
@@ -81,7 +81,7 @@ const MovieInfor = ({ movie, setOpenModal }) => {
                 {/* Watch Button */}
                 <div className="sm:col-span-2 col-span-3 flex justify-end font-medium text-sm">
                   <Link
-                    to={`/watch/${movie?._id}`}
+                    to={`/watch/${movieId}`}
                     className="bg-dry py-4 hover:bg-subMain transitions border-2 border-subMain rounded-full flex-rows gap-4 w-full sm:py-3"
                   >
                     <FaPlay className="w-3 h-3" /> Watch
