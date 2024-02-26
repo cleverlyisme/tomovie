@@ -9,6 +9,7 @@ import useAppContext from "../../hooks/useAppContext";
 import Layout from "../../components/Layout";
 import { getMovieById } from "../../services/movie.service";
 import { DownloadVideo } from "../../utils/functionalities";
+import { addFavorite } from "../../services/user.service";
 
 const Watch = () => {
   const {
@@ -20,6 +21,18 @@ const Watch = () => {
 
   const [movie, setMovie] = useState(null);
   const [progress, setProgress] = useState(0);
+
+  const handleAddFavorite = async (movieId) => {
+    setIsLoading(true);
+    try {
+      await addFavorite({ movieId: id });
+
+      toast.success("Movie added to your favorites");
+    } catch (err) {
+      toast.error(err?.response?.data || err.message);
+    }
+    setIsLoading(false);
+  };
 
   const handleDownloadVideo = async () => {
     setIsLoading(true);
@@ -66,7 +79,10 @@ const Watch = () => {
             <BiArrowBack /> {movie?.name}
           </Link>
           <div className="flex-btn sm:w-auto w-full gap-5">
-            <button className="bg-white hover:text-subMain transitions bg-opacity-30 text-white rounded px-4 py-3 text-sm">
+            <button
+              className="bg-white hover:text-subMain transitions bg-opacity-30 text-white rounded px-4 py-3 text-sm"
+              onClick={handleAddFavorite}
+            >
               <FaHeart />
             </button>
             <button
