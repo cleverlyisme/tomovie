@@ -1,16 +1,59 @@
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
-
-import movies from "../../data/movies";
-import Layout from "../../components/Layout";
 import { FaCloudDownloadAlt, FaHeart, FaPlay } from "react-icons/fa";
+import toast from "react-hot-toast";
+import FileSaver from "file-saver";
+
+import useAppContext from "../../hooks/useAppContext";
+import Layout from "../../components/Layout";
+import { getMovieById } from "../../services/movie.service";
+import { DownloadVideo } from "../../utils/functionalities";
 
 const Watch = () => {
+  const {
+    loadingState: { setIsLoading },
+  } = useAppContext();
   const [play, setPlay] = useState(false);
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  const movie = movies.find((movie) => movie._id === id);
+  const [movie, setMovie] = useState(null);
+  const [progress, setProgress] = useState(0);
+
+  const handleDownloadVideo = async () => {
+    setIsLoading(true);
+    try {
+      await DownloadVideo(movie?.video, setProgress).then((data) => {
+        setProgress(0);
+        FileSaver.saveAs(data, movie?.name);
+      });
+
+      toast.success("Downloaded movie successfully");
+    } catch (err) {
+      toast.error(err?.response?.data || err.message);
+    }
+    setIsLoading(false);
+  };
+
+  const getData = async () => {
+    setIsLoading(true);
+    try {
+      const response = await getMovieById(id);
+
+      const data = response.data;
+
+      setMovie(data.movie);
+    } catch (err) {
+      toast.error(err?.response?.data || err.message);
+      navigate("/");
+    }
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <Layout>
@@ -26,7 +69,10 @@ const Watch = () => {
             <button className="bg-white hover:text-subMain transitions bg-opacity-30 text-white rounded px-4 py-3 text-sm">
               <FaHeart />
             </button>
-            <button className="bg-subMain flex-rows gap-2 hover:text-main transitions text-white rounded px-8 py-3 font-medium text-sm">
+            <button
+              className="bg-subMain flex-rows gap-2 hover:text-main transitions text-white rounded px-8 py-3 font-medium text-sm"
+              onClick={handleDownloadVideo}
+            >
               <FaCloudDownloadAlt /> Download
             </button>
           </div>
