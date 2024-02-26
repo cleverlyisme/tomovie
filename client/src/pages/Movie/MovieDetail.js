@@ -49,7 +49,7 @@ const MovieDetail = () => {
   return (
     <Layout>
       <ShareMovieModal open={openModal} setOpen={setOpenModal} movie={movie} />
-      <MovieInfor movie={movie} setOpenModal={setOpenModal} />
+      <MovieInfor movieId={id} movie={movie} setOpenModal={setOpenModal} />
       <div className="container mx-auto min-h-screen px-2 my-6">
         <MovieCasts casts={movie?.casts || []} />
         <MovieRates movie={movie} setMovie={setMovie} />
