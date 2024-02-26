@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaPlay, FaShareAlt } from "react-icons/fa";
 import { FiLogIn } from "react-icons/fi";
 import FileSaver from "file-saver";
@@ -14,6 +14,7 @@ const MovieInfor = ({ movieId, movie, setOpenModal }) => {
     loadingState: { setIsLoading },
   } = useAppContext();
   const [progress, setProgress] = useState(0);
+  const navigate = useNavigate();
 
   const handleDownloadVideo = async (videoUrl, name) => {
     setIsLoading(true);
@@ -80,12 +81,12 @@ const MovieInfor = ({ movieId, movie, setOpenModal }) => {
                 </div>
                 {/* Watch Button */}
                 <div className="sm:col-span-2 col-span-3 flex justify-end font-medium text-sm">
-                  <Link
-                    to={`/watch/${movieId}`}
+                  <button
+                    onClick={() => navigate(`/watch/${movieId}`)}
                     className="bg-dry py-4 hover:bg-subMain transitions border-2 border-subMain rounded-full flex-rows gap-4 w-full sm:py-3"
                   >
                     <FaPlay className="w-3 h-3" /> Watch
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>
