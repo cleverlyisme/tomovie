@@ -1,13 +1,18 @@
-import toast from "react-hot-toast";
-
 import { useNavigate } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
+import toast from "react-hot-toast";
+
+import useAppContext from "../hooks/useAppContext";
 import { addFavorite } from "../services/user.service";
 
 const Movie = ({ movie }) => {
+  const {
+    loadingState: { setIsLoading },
+  } = useAppContext();
   const navigate = useNavigate();
 
   const handleAddFavorite = async (movieId) => {
+    setIsLoading(true);
     try {
       await addFavorite({ movieId });
 
@@ -15,6 +20,7 @@ const Movie = ({ movie }) => {
     } catch (err) {
       toast.error(err?.response?.data || err.message);
     }
+    setIsLoading(false);
   };
 
   return (

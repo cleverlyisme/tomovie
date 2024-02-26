@@ -54,7 +54,7 @@ const Register = () => {
           <div className="w-full">
             <Input
               label="FullName"
-              placeholder="Netflixo React Tailwind"
+              placeholder="Tomovie"
               type="text"
               bg={true}
               name="fullName"
@@ -66,7 +66,7 @@ const Register = () => {
           <div className="w-full">
             <Input
               label="Email"
-              placeholder="netflixo@gmail.com"
+              placeholder="tuananhdao.dev.js@gmail.com"
               type="email"
               name="email"
               register={register("email")}
@@ -77,7 +77,7 @@ const Register = () => {
           <div className="w-full">
             <Input
               label="Password"
-              placeholder="*******"
+              placeholder="********"
               type="password"
               bg={true}
               name="password"
